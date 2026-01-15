@@ -3,6 +3,8 @@ package main
 import (
 	"log/slog"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/henryfool91/pet-sso/internal/app"
 	"github.com/henryfool91/pet-sso/internal/config"
@@ -24,10 +26,18 @@ func main() {
 	)
 
 	application := app.New(log, cfg.GRPC.Port, cfg.StoragePath, cfg.TokenTTL)
-	application.GRPCSrv.MustRun()
-	defer application.GRPCSrv.Stop()
+	go application.GRPCSrv.MustRun()
 
-	//TODO: запуск grpc сервера
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, syscall.SIGTERM, syscall.SIGINT)
+
+	receivedSignal := <-stop
+
+	log.Info("stopping application", slog.String("signal", receivedSignal.String()))
+
+	application.GRPCSrv.Stop()
+
+	log.Info("application stopped")
 
 }
 

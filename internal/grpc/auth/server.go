@@ -16,7 +16,7 @@ func Register(gRPC *grpc.Server) {
 }
 
 func (s *serverAPI) Login(ctx context.Context, req *ssov1.LoginRequest) (*ssov1.LoginResponse, error) {
-	panic("not implemented")
+	return &ssov1.LoginResponse{Token: "1234"}, nil
 }
 
 // IsAdmin implements [ssov1.AuthServer].
