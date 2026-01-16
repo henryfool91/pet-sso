@@ -11,10 +11,11 @@ import (
 
 func New(
 	log *slog.Logger,
+	authService authgrpc.Auth,
 	port int,
 ) *App {
 	serv := grpc.NewServer()
-	authgrpc.Register(serv)
+	authgrpc.Register(serv, authService)
 	return &App{
 		gRPCServer: serv,
 		log:        log,

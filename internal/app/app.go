@@ -4,6 +4,9 @@ import (
 	"log/slog"
 	"time"
 
+	"github.com/henryfool91/pet-sso/internal/services/auth"
+	"github.com/henryfool91/pet-sso/internal/storage/sqlite"
+
 	grpcapp "github.com/henryfool91/pet-sso/internal/app/grpc"
 )
 
@@ -17,10 +20,12 @@ func New(
 	storagePath string,
 	tokenTTL time.Duration,
 ) *App {
-	// TODO: init storage
+	storage, err := sqlite.New(storagePath)
 
-	// TODO: init auth service
-
-	grpcApp := grpcapp.New(log, grpcPort)
+	if err != nil {
+		panic(err)
+	}
+	authServ := auth.New(log, storage, storage, storage, tokenTTL)
+	grpcApp := grpcapp.New(log, authServ, grpcPort)
 	return &App{GRPCSrv: grpcApp}
 }
