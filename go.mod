@@ -5,6 +5,7 @@ go 1.25.4
 require (
 	buf.build/go/protovalidate v1.1.0
 	github.com/golang-jwt/jwt/v5 v5.3.0
+	github.com/golang-migrate/migrate/v4 v4.19.1
 	github.com/henryfool91/pet-sso-protos v0.0.2
 	github.com/ilyakaznacheev/cleanenv v1.5.0
 	golang.org/x/crypto v0.46.0
@@ -18,6 +19,7 @@ require (
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
 	github.com/google/cel-go v0.26.1 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
 	golang.org/x/exp v0.0.0-20250813145105-42675adae3e6 // indirect
 	golang.org/x/net v0.47.0 // indirect

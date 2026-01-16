@@ -1,0 +1,9 @@
+# https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  migrate-local:
+    desc: "Apply migrations to local db"
+    cmds:
+      - go run ./cmd/migrator/ --storage-path ./storage/sso.db --migrations-path ./migrations/

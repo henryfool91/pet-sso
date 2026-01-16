@@ -7,6 +7,9 @@ local.yaml
 *.env
 *__debug_*
 
+# SQLite
+*.db
+
 *:Zone.Identifier
 
 ### Go ###
